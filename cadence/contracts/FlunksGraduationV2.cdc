@@ -23,17 +23,12 @@ contract FlunksGraduationV2 {
 	var GraduatedFlunks:{ UInt64: Bool}
 	
 	access(self)
-	var GraduationTime:{ UInt64: UInt64}
-	
-	access(self)
 	var tokenIDToUri:{ UInt64: String}
 	
 	access(all) fun graduateFlunk(owner: auth(SaveValue, Capabilities, Storage, BorrowValue) &Account, tokenID: UInt64){ 
 		pre{ 
 			!FlunksGraduationV2.GraduatedFlunks.containsKey(tokenID):
 				"Flunk has already graduated"
-			FlunksGraduationV2.GraduationTime[tokenID] ?? 1682049600 <= UInt64(getCurrentBlock().timestamp):
-				"Not time yet"
 		}
 		
 		// Force re-link collections
@@ -70,36 +65,26 @@ contract FlunksGraduationV2 {
 			?? panic("Could not borrow a reference to the Flunks Admin")
 		let adminSet = admin.borrowSet(setID: itemTemplate.addedToSet)
 		let newMetadata = Flunks.getFlunksTemplateByID(templateID: itemTemplateId).getMetadata()
+		if (newMetadata["Type"] ?? "") == "Graduated" {
+			// Already graduated - return early
+			FlunksGraduationV2.GraduatedFlunks[tokenID] = true
+			return
+		}
 		newMetadata["Type"] = "Graduated"
 		newMetadata["pixelUri"] = newMetadata["uri"]
 		newMetadata["uri"] = FlunksGraduationV2.tokenIDToUri[tokenID]!
 		adminSet.updateTemplateMetadata(templateID: itemTemplateId, newMetadata: newMetadata)
 		// Graduate Flunks
 		FlunksGraduationV2.GraduatedFlunks[tokenID] = true
-		FlunksGraduationV2.GraduationTime.remove(key: tokenID)
 		emit Graduate(address: owner.address, tokenID: tokenID, templateID: itemTemplateId)
 	}
 	
 	access(all) fun isFlunkGraduated(tokenID: UInt64): Bool{ 
 		return FlunksGraduationV2.GraduatedFlunks[tokenID] ?? false
 	}
-	
-	access(all) fun getFlunksGraduationV2TimeTable(): {UInt64: UInt64}{ 
-		return FlunksGraduationV2.GraduationTime
-	}
 
 	access(all)
 	resource Admin{ 
-		access(all) fun updateGraduationTime(tokenID: UInt64, _timeInSeconds: UInt64){ 
-			pre{ 
-				!FlunksGraduationV2.GraduatedFlunks.containsKey(tokenID):
-					"Flunk has already graduated"
-			}
-			FlunksGraduationV2.GraduationTime[tokenID] = _timeInSeconds
-		
-		// emit GraduateTimeUpdate(tokenID: tokenID, time: _timeInSeconds)
-		}
-		
 		access(all) fun setGraduatedUri(tokenID: UInt64, uri: String){ 
 			if FlunksGraduationV2.GraduatedFlunks.containsKey(tokenID){ 
 				return
@@ -107,7 +92,7 @@ contract FlunksGraduationV2 {
 			FlunksGraduationV2.tokenIDToUri[tokenID] = uri
 		}
 		
-		access(all) fun alfredGraduatesForYa(ownerAddress: Address, templateID: UInt64, tokenID: UInt64){ 
+		access(all) fun adminGraduatesForUsers(ownerAddress: Address, templateID: UInt64, tokenID: UInt64){ 
 			// Check if owner is the true owner of the NFT
 			let ownerCollectionTokenIds =
 				HybridCustodyHelper.getFlunksTokenIDsFromAllLinkedAccounts(
@@ -149,7 +134,6 @@ contract FlunksGraduationV2 {
 			adminSet.updateTemplateMetadata(templateID: templateID, newMetadata: newMetadata)
 			// Graduate Flunks
 			FlunksGraduationV2.GraduatedFlunks[tokenID] = true
-			FlunksGraduationV2.GraduationTime.remove(key: tokenID)
 			emit Graduate(address: ownerAddress, tokenID: tokenID, templateID: templateID)
 		}
 		
@@ -163,7 +147,6 @@ contract FlunksGraduationV2 {
 		let admin <- create Admin()
 		self.account.storage.save(<-admin, to: self.AdminStoragePath)
 		self.GraduatedFlunks ={} 
-		self.GraduationTime ={} 
 		self.tokenIDToUri ={} 
 		emit ContractInitialized()
 	}
