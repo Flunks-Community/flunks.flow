@@ -513,6 +513,18 @@ contract Staking{
 
 			let cap = signer.capabilities.storage.issue<&GUM.Vault>(GUM.VaultStoragePath)
             signer.capabilities.publish(cap, at: GUM.VaultReceiverPublicPath)
+			signer.capabilities.publish(cap, at: GUM.VaultBalancePublicPath)
+		}
+
+		let balanceRef = getAccount(signer.address)
+        	.capabilities.borrow<&GUM.Vault>(GUM.VaultBalancePublicPath)
+		if balanceRef == nil{
+			signer.capabilities.unpublish(GUM.VaultReceiverPublicPath)
+			signer.capabilities.unpublish(GUM.VaultBalancePublicPath)
+
+			let cap = signer.capabilities.storage.issue<&GUM.Vault>(GUM.VaultStoragePath)
+			signer.capabilities.publish(cap, at: GUM.VaultReceiverPublicPath)
+			signer.capabilities.publish(cap, at: GUM.VaultBalancePublicPath)
 		}
 	}
 	
