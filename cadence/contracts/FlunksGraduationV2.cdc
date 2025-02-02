@@ -55,8 +55,8 @@ contract FlunksGraduationV2 {
 		let serialView =
 			item?.resolveView(Type<MetadataViews.Serial>())
 			?? panic("Could not get the item's serial view")
-		let serial = serialView as! MetadataViews.Serial
-		let itemTemplateId = serial.number
+		let serial = serialView as! MetadataViews.Serial?
+		let itemTemplateId = serial?.number ?? 0
 		let itemTemplate = Flunks.getFlunksTemplateByID(templateID: itemTemplateId)
 		
 		// Update the NFT metadata and traits on-chain
@@ -116,8 +116,8 @@ contract FlunksGraduationV2 {
 			let serialView =
 				item?.resolveView(Type<MetadataViews.Serial>())
 				?? panic("Could not get the item's serial view")
-			let serial = serialView as! MetadataViews.Serial
-			let itemTemplateId = serial.number
+			let serial = serialView as! MetadataViews.Serial?
+			let itemTemplateId = serial?.number ?? 0
 			let itemTemplate = Flunks.getFlunksTemplateByID(templateID: itemTemplateId)
 			
 			// Update the NFT metadata and traits on-chain
