@@ -491,19 +491,20 @@ contract Flunks: NonFungibleToken{
                 publicLinkedType: Type<&Flunks.Collection{NonFungibleToken.CollectionPublic, MetadataViews.ResolverCollection}>()
             )
         case Type<MetadataViews.NFTCollectionDisplay>():
-            return MetadataViews.NFTCollectionDisplay(
-                name: "Flunks",
-                description: "Flunks are cute but mischievous high-schoolers wreaking havoc #onFlow",
-                externalURL: MetadataViews.ExternalURL("https://flunks.io/"),
-                squareImage: MetadataViews.Media(
-                    file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/website-assets/banner_2023.png"),
-                    mediaType: "image/png"
-                ),
-                bannerImage: MetadataViews.Media(
-                    file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/website-assets/banner_2023.png"),
-                    mediaType: "image/png"
-                )
-            )
+    return MetadataViews.NFTCollectionDisplay(
+        name: "Flunks",
+        description: "Flunks are cute but mischievous high-schoolers wreaking havoc #onFlow",
+        externalURL: MetadataViews.ExternalURL("https://flunks.io/"),
+        squareImage: MetadataViews.Media(
+            file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/images/banner12.png"),
+            mediaType: "image/png"
+        ),
+        bannerImage: MetadataViews.Media(
+            file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/images/banner12.png"),
+            mediaType: "image/png"
+        )
+    )
+
         case Type<MetadataViews.EVMBridgedMetadata>():
             // Optional: only if you support EVM bridging
             return nil
