@@ -493,7 +493,7 @@ contract Flunks: NonFungibleToken{
         case Type<MetadataViews.NFTCollectionDisplay>():
             return MetadataViews.NFTCollectionDisplay(
                 name: "Flunks",
-                description: "Flunks are cute but mischievous high-schoolers wreaking havoc #onFlow",
+                description: "Flunks are cute but mischievous high-schoolers wreaking havoc,
                 externalURL: MetadataViews.ExternalURL("https://flunks.io/"),
                 squareImage: MetadataViews.Media(
                     file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/images/banner12.png"),
