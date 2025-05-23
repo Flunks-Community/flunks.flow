@@ -482,8 +482,35 @@ contract Flunks: NonFungibleToken{
 	}
 
 	access(all) fun resolveContractView(resourceType: Type?, viewType: Type): AnyStruct? {
-		return nil
-	}
+    switch viewType {
+        case Type<MetadataViews.NFTCollectionData>():
+            return MetadataViews.NFTCollectionData(
+                storagePath: Flunks.CollectionStoragePath,
+                publicPath: Flunks.CollectionPublicPath,
+                publicCollection: Type<&Flunks.Collection>(),
+                publicLinkedType: Type<&Flunks.Collection{NonFungibleToken.CollectionPublic, MetadataViews.ResolverCollection}>()
+            )
+        case Type<MetadataViews.NFTCollectionDisplay>():
+            return MetadataViews.NFTCollectionDisplay(
+                name: "Flunks",
+                description: "Flunks are cute but mischievous high-schoolers wreaking havoc #onFlow",
+                externalURL: MetadataViews.ExternalURL("https://flunks.io/"),
+                squareImage: MetadataViews.Media(
+                    file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/website-assets/banner_2023.png"),
+                    mediaType: "image/png"
+                ),
+                bannerImage: MetadataViews.Media(
+                    file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/website-assets/banner_2023.png"),
+                    mediaType: "image/png"
+                )
+            )
+        case Type<MetadataViews.EVMBridgedMetadata>():
+            // Optional: only if you support EVM bridging
+            return nil
+        default:
+            return nil
+    }
+}
 	
 	init(){ 
 		self.CollectionStoragePath = /storage/FlunksCollection
