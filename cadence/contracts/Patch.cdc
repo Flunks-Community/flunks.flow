@@ -247,14 +247,14 @@ contract Patch: NonFungibleToken{
 		}
 		
 		access(all)
-		view fun getSupportedNFTTypes():{ Type: Bool}{ 
-			panic("implement me")
-		}
-		
-		access(all)
-		view fun isSupportedNFTType(type: Type): Bool{ 
-			panic("implement me")
-		}
+                view fun getSupportedNFTTypes(): {Type: Bool} {
+                        return {Type<@Patch.NFT>(): true}
+                }
+
+                access(all)
+                view fun isSupportedNFTType(type: Type): Bool {
+                        return type == Type<@Patch.NFT>()
+                }
 		
 		access(all)
 		fun createEmptyCollection(): @{NonFungibleToken.Collection}{ 
@@ -284,7 +284,6 @@ contract Patch: NonFungibleToken{
 					"Cannot mint Patch - mint limit reached"
 			}
 			
-			// TODO: mint Patch NFT
 			let nftTemplate = Patch.PatchTemplates[templateID]!
 			let newNFT: @NFT <- create Patch.NFT(initID: Patch.totalSupply, initTemplateID: templateID, serialNumber: nftTemplate.nextSerialNumber)
 			emit Mint(id: newNFT.id, templateID: nftTemplate.templateID, serialNumber: nftTemplate.nextSerialNumber)

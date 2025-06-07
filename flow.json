@@ -184,43 +184,28 @@
   },
   "accounts": {
     "emulator-account": {
-      "address": "f8d6e0586b0a20c7",
-      "key": "4f26e4d948ea933be2c5632861212c09b969e49f5e0688114c321cf7140ae55b"
+      "address": "f8d6e0586b0a20c7"
     },
     "account1": {
-      "address": "01cf0e2f2f715450",
-      "key": "24a61daafb7e00e7de38495eeb9b2e5c7b53398e1bbe12b500d3e242fcbe9d8a",
-      "_public": "a7693e1c4ad81fa694cb6be6790b6bd6c845db85423d2e979bab58ccc20611bb5325c6976e9ee71c0f7e35e4d57886a108f5df00fc088e49a72e247f28c5ec90"
+      "address": "01cf0e2f2f715450"
     },
     "account2": {
-      "address": "179b6b1cb6755e31",
-      "key": "6c443836186a13c74e3de38ca6b34e6d8e8b4afdde15d4446416cd2dfd8b9237",
-      "_public": "e76e29b8de1030898be2d997c9873029bf2d16d763afdeee6159940d2a18edc8a963d7be126feee0c85648106868bf03e9137013c5c318790994bb7820ae57d9"
+      "address": "179b6b1cb6755e31"
     },
     "testnet-admin": {
-      "address": "0xe666c53e1758dec6",
-      "key": "86b31b9a712b4d8f6ee28323ec89bb596aaf1c9b8c76e4a8ca280fd30a47f287",
-      "_public": "6d6a6a9e380c0d314c5367ae551ad366f941fe5ab5798e63c5254ef7dca845d4c2523dbbe18c0ef4d29f1f3401c46144d134bf1bfd928e05142ed2c298cfcc25"
+      "address": "0xe666c53e1758dec6"
     },
     "testnet-staking-admin": {
-      "address": "0x65312b16488ed22f",
-      "key": "569f84514aacc0796b483235bfb68667d950ad33c645eaa399a64cbc7e985406",
-      "_public": "0ac4201501c666d44bc5f6fb26360598ac96f8bca628810dbf1956dd57d895df0b4f01f7341fdcaf61155088d61661d516316db6ea29a34df5d3b8307f5403e5"
+      "address": "0x65312b16488ed22f"
     },
     "testnet-user": {
-      "address": "0xe644557e02c0f29b",
-      "key": "ec2bbd07533fb129a26e309a753072723e52472e8906eca9141ac52e6014f9b5",
-      "_public": "7860d561e787ecca844748540d37730dda010064a76627bba64b1cd9d0f272d36b54881f4015360bccf8f2b2ee8fc231e47fd1b89293ef2386c17181cf55a102"
+      "address": "0xe644557e02c0f29b"
     },
     "testnet-user2": {
-      "address": "0x0aa614cf950d7267",
-      "key": "189d9d2b12f689edcd30a549b0a2ce66420159818188a4d27a9a25c67c1423c8",
-      "_public": "5594247c0b4394e7a178ccd5747f9cc4c4f65ae89f8021eba5c99c8aefc0211f41834c20c2d26bda73071e501e02b188cf3f0762e5c74eae144f6829b9c4b854"
+      "address": "0x0aa614cf950d7267"
     },
     "testnet-user3": {
-      "address": "0xeec1ad1284f772b8",
-      "key": "d7429a1755ebad4872d52f0f558021aa70e05d17e32e158277019dc6b111546f",
-      "_public": "d3305fe581d51d7ebc21f37565cd2df35739a7c3956d1e54d7717dd2c71f471f13dc120957c204f8b5ccdd94ceb5692f701b48a1577f7a6067acc1cb6de7f9c8"
+      "address": "0xeec1ad1284f772b8"
     }
   },
   "deployments": {

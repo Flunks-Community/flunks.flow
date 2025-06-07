@@ -285,14 +285,14 @@ contract Flunks: NonFungibleToken{
 		}
 		
 		access(all)
-		view fun getSupportedNFTTypes():{ Type: Bool}{ 
-			panic("implement me")
-		}
-		
-		access(all)
-		view fun isSupportedNFTType(type: Type): Bool{ 
-			panic("implement me")
-		}
+                view fun getSupportedNFTTypes(): {Type: Bool} {
+                        return {Type<@Flunks.NFT>(): true}
+                }
+
+                access(all)
+                view fun isSupportedNFTType(type: Type): Bool {
+                        return type == Type<@Flunks.NFT>()
+                }
 		
 		access(all)
 		fun createEmptyCollection(): @{NonFungibleToken.Collection}{ 
@@ -493,14 +493,14 @@ contract Flunks: NonFungibleToken{
         case Type<MetadataViews.NFTCollectionDisplay>():
             return MetadataViews.NFTCollectionDisplay(
                 name: "Flunks",
-                description: "Flunks are cute but mischievous high-schoolers wreaking havoc,
+                description: "Flunks are cute but mischievous high-schoolers wreaking havoc #onFlow",
                 externalURL: MetadataViews.ExternalURL("https://flunks.io/"),
                 squareImage: MetadataViews.Media(
-                    file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/images/banner12.png"),
+                    file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/images/flunks.png"),
                     mediaType: "image/png"
                 ),
                 bannerImage: MetadataViews.Media(
-                    file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/images/banner12.png"),
+                    file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/website-assets/banner_2023.png"),
                     mediaType: "image/png"
                 ),
                 socials: {
