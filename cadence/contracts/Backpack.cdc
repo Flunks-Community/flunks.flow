@@ -329,14 +329,14 @@ contract Backpack: NonFungibleToken{
 		}
 		
 		access(all)
-		view fun getSupportedNFTTypes():{ Type: Bool}{ 
-			panic("implement me")
-		}
-		
-		access(all)
-		view fun isSupportedNFTType(type: Type): Bool{ 
-			panic("implement me")
-		}
+                view fun getSupportedNFTTypes(): {Type: Bool} {
+                        return {Type<@Backpack.NFT>(): true}
+                }
+
+                access(all)
+                view fun isSupportedNFTType(type: Type): Bool {
+                        return type == Type<@Backpack.NFT>()
+                }
 		
 		access(all)
 		fun createEmptyCollection(): @{NonFungibleToken.Collection}{ 
