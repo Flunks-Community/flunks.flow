@@ -1,0 +1,55 @@
+{
+  "name": "Epic Flunk #1",
+  "description": "A legendary flunk with rare traits",
+  "image": "https://storage.googleapis.com/flunks_public/images/flunk-001.png",
+  "animation_url": "https://storage.googleapis.com/flunks_public/animations/flunk-001.mp4",
+  "external_url": "https://flunks.com/flunk-001",
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Space"
+    },
+    {
+      "trait_type": "Body",
+      "value": "Golden"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Laser"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Smile"
+    },
+    {
+      "trait_type": "Hat",
+      "value": "Crown"
+    },
+    {
+      "trait_type": "Accessory",
+      "value": "Glasses"
+    },
+    {
+      "trait_type": "Rarity",
+      "value": "Legendary"
+    },
+    {
+      "trait_type": "Level",
+      "value": 25,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Power",
+      "value": 500,
+      "display_type": "number"
+    },
+    {
+      "trait_type": "Generation",
+      "value": "Gen 1"
+    },
+    {
+      "trait_type": "Edition",
+      "value": "1 of 1000"
+    }
+  ]
+}

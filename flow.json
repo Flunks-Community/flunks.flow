@@ -17,6 +17,12 @@
       "aliases": {
         "emulator": "0xf8d6e0586b0a20c7"
       }
+    },
+    "SimpleFlunksWithTraits": {
+      "source": "./cadence/contracts/SimpleFlunksWithTraits.cdc",
+      "aliases": {
+        "emulator": "0xf8d6e0586b0a20c7"
+      }
     }
   },
   "networks": {
@@ -36,7 +42,7 @@
   },
   "deployments": {
     "emulator": {
-      "emulator-account": ["SimpleFlunks"]
+      "emulator-account": ["SimpleFlunks", "SimpleFlunksWithTraits"]
     }
   }
 }
