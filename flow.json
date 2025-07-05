@@ -9,214 +9,34 @@
     "NonFungibleToken": {
       "source": "./cadence/contracts/NonFungibleToken.cdc",
       "aliases": {
-        "testnet": "0x631e88ae7f1d7c20",
-        "mainnet": "0x1d7e57aa55817448"
+        "emulator": "0xf8d6e0586b0a20c7"
       }
     },
-    "CapabilityDelegator": {
-      "source": "./cadence/contracts/CapabilityDelegator.cdc",
+    "SimpleFlunks": {
+      "source": "./cadence/contracts/SimpleFlunks.cdc",
       "aliases": {
-        "testnet": "0x294e44e1ec6993c6",
-        "mainnet": "0xd8a7e05a7ac670c0"
-      }
-    },
-    "CapabilityFactory": {
-      "source": "./cadence/contracts/CapabilityFactory.cdc",
-      "aliases": {
-        "testnet": "0x294e44e1ec6993c6",
-        "mainnet": "0xd8a7e05a7ac670c0"
-      }
-    },
-    "CapabilityFilter": {
-      "source": "./cadence/contracts/CapabilityFactory.cdc",
-      "aliases": {
-        "testnet": "0x294e44e1ec6993c6",
-        "mainnet": "0xd8a7e05a7ac670c0"
-      }
-    },
-    "FungibleToken": {
-      "source": "./cadence/contracts/FungibleToken.cdc",
-      "aliases": {
-        "emulator": "0xee82856bf20e2aa6",
-        "testnet": "0x9a0766d93b6608b7",
-        "mainnet": "0xf233dcee88fe0abe"
-      }
-    },
-    "FungibleTokenMetadataViews": {
-      "source": "./cadence/contracts/FungibleTokenMetadataViews.cdc",
-      "aliases": {
-        "emulator": "0xee82856bf20e2aa6",
-        "testnet": "0x9a0766d93b6608b7",
-        "mainnet": "0xf233dcee88fe0abe"
-      }
-    },
-    "NFTStorefrontV2": {
-      "source": "./cadence/contracts/NFTStorefront.cdc",
-      "aliases": {
-        "testnet": "0x2d55b98eb200daef",
-        "mainnet": "0x4eb8a10cb9f87357"
-      }
-    },
-    "ViewResolver": {
-      "source": "./cadence/contracts/ViewResolver.cdc",
-      "aliases": {
-        "testnet": "0x631e88ae7f1d7c20",
-        "mainnet": "0x1d7e57aa55817448"
-      }
-    },
-    "MetadataViews": {
-      "source": "./cadence/contracts/MetadataViews.cdc",
-      "aliases": {
-        "testnet": "0x631e88ae7f1d7c20",
-        "mainnet": "0x1d7e57aa55817448"
-      }
-    },
-    "DapperUtilityCoin": {
-      "source": "./cadence/contracts/DapperUtilityCoin.cdc",
-      "aliases": {
-        "testnet": "0x82ec283f88a62e65",
-        "mainnet": "0xead892083b3e2c6c"
-      }
-    },
-    "Flunks": {
-      "source": "./cadence/contracts/Flunks.cdc",
-      "aliases": {
-        "testnet": "0xe666c53e1758dec6",
-        "mainnet": "0x807c3d470888cc48"
-      }
-    },
-    "Backpack": {
-      "source": "./cadence/contracts/Backpack.cdc",
-      "aliases": {
-        "testnet": "0xe666c53e1758dec6",
-        "mainnet": "0x807c3d470888cc48"
-      }
-    },
-    "BackpackMinter": {
-      "source": "./cadence/contracts/BackpackMinter.cdc",
-      "aliases": {
-        "testnet": "0xe666c53e1758dec6",
-        "mainnet": "0x807c3d470888cc48"
-      }
-    },
-    "Patch": {
-      "source": "./cadence/contracts/Patch.cdc",
-      "aliases": {
-        "testnet": "0xe666c53e1758dec6",
-        "mainnet": "0x807c3d470888cc48"
-      }
-    },
-    "FlunksWhitelistMinter": {
-      "source": "./cadence/contracts/FlunksWhitelistMinter.cdc",
-      "aliases": {
-        "testnet": "0xe666c53e1758dec6",
-        "mainnet": "0x807c3d470888cc48"
-      }
-    },
-    "FlunksGraduationV2": {
-      "source": "./cadence/contracts/FlunksGraduationV2.cdc",
-      "aliases": {
-        "testnet": "0xe666c53e1758dec6",
-        "mainnet": "0x807c3d470888cc48"
-      }
-    },
-    "NFTCatalog": {
-      "source": "./cadence/contracts/NFTCatalog.cdc",
-      "aliases": {
-        "testnet": "0x324c34e1c517e4db",
-        "mainnet": "0x49a7cda3a1eecc29"
-      }
-    },
-    "Staking": {
-      "source": "./cadence/contracts/Staking.cdc",
-      "aliases": {
-        "testnet": "0x65312b16488ed22f",
-        "mainnet": "0x807c3d470888cc48"
-      }
-    },
-    "GUM": {
-      "source": "./cadence/contracts/GUM.cdc",
-      "aliases": {
-        "testnet": "0x65312b16488ed22f",
-        "mainnet": "0x807c3d470888cc48"
-      }
-    },
-    "HybridCustody": {
-      "source": "./cadence/contracts/HybridCustody.cdc",
-      "aliases": {
-        "testnet": "0x294e44e1ec6993c6",
-        "mainnet": "0xd8a7e05a7ac670c0"
-      }
-    },
-    "HybridCustodyHelper": {
-      "source": "./cadence/contracts/HybridCustodyHelper.cdc",
-      "aliases": {
-        "testnet": "0xe666c53e1758dec6",
-        "mainnet": "0x807c3d470888cc48"
-      }
-    },
-    "GUMStakingTracker": {
-      "source": "./cadence/contracts/GUMStakingTracker.cdc",
-      "aliases": {
-        "testnet": "0xe666c53e1758dec6",
-        "mainnet": "0x807c3d470888cc48"
-      }
-    },
-    "TokenForwarding": {
-      "source": "./cadence/contracts/TokenForwarding.cdc",
-      "aliases": {
-        "mainnet": "0xe544175ee0461c4b"
-      }
-    },
-    "FlunksProfile": {
-      "source": "./cadence/contracts/FlunksProfile.cdc",
-      "aliases": {
-        "testnet": "0xe666c53e1758dec6",
-        "mainnet": "0x807c3d470888cc48"
+        "emulator": "0xf8d6e0586b0a20c7"
       }
     }
   },
   "networks": {
     "emulator": "127.0.0.1:3569",
     "mainnet": "access.mainnet.nodes.onflow.org:9000",
-    "testnet": "access.devnet.nodes.onflow.org:9000",
-    "mainnet-16": "access-001.mainnet16.nodes.onflow.org:9000"
+    "testnet": "access.devnet.nodes.onflow.org:9000"
   },
   "accounts": {
     "emulator-account": {
-      "address": "f8d6e0586b0a20c7"
+      "address": "f8d6e0586b0a20c7",
+      "key": "8f6f891a07bec4d03468db68a4be2400e3f830288fc4d1144397f13d6039a0da"
     },
     "account1": {
-      "address": "01cf0e2f2f715450"
-    },
-    "account2": {
-      "address": "179b6b1cb6755e31"
-    },
-    "testnet-admin": {
-      "address": "0xe666c53e1758dec6"
-    },
-    "testnet-staking-admin": {
-      "address": "0x65312b16488ed22f"
-    },
-    "testnet-user": {
-      "address": "0xe644557e02c0f29b"
-    },
-    "testnet-user2": {
-      "address": "0x0aa614cf950d7267"
-    },
-    "testnet-user3": {
-      "address": "0xeec1ad1284f772b8"
+      "address": "01cf0e2f2f715450",
+      "key": "8f6f891a07bec4d03468db68a4be2400e3f830288fc4d1144397f13d6039a0da"
     }
   },
   "deployments": {
     "emulator": {
-      "emulator-account": ["HybridCustodyHelper", "BackpackMinter"]
-    },
-    "testnet": {
-      "testnet-staking-admin": ["Flunks", "Staking", "GUM", "FlunksProfile"]
-    },
-    "mainnet": {
-      "mainnet-contract": ["Flunks", "Backpack"]
+      "emulator-account": ["SimpleFlunks"]
     }
   }
 }

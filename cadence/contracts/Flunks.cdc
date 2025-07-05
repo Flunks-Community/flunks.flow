@@ -488,7 +488,7 @@ contract Flunks: NonFungibleToken{
                 storagePath: Flunks.CollectionStoragePath,
                 publicPath: Flunks.CollectionPublicPath,
                 publicCollection: Type<&Flunks.Collection>(),
-                publicLinkedType: Type<&Flunks.Collection{NonFungibleToken.CollectionPublic, MetadataViews.ResolverCollection}>()
+                publicLinkedType: Type<&Flunks.Collection>()
             )
         case Type<MetadataViews.NFTCollectionDisplay>():
             return MetadataViews.NFTCollectionDisplay(
