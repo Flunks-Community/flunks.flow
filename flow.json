@@ -1,48 +1,105 @@
 {
-  "emulators": {
-    "default": {
-      "port": 3569,
-      "serviceAccount": "emulator-account"
-    }
-  },
-  "contracts": {
-    "NonFungibleToken": {
-      "source": "./cadence/contracts/NonFungibleToken.cdc",
-      "aliases": {
-        "emulator": "0xf8d6e0586b0a20c7"
-      }
-    },
-    "SimpleFlunks": {
-      "source": "./cadence/contracts/SimpleFlunks.cdc",
-      "aliases": {
-        "emulator": "0xf8d6e0586b0a20c7"
-      }
-    },
-    "SimpleFlunksWithTraits": {
-      "source": "./cadence/contracts/SimpleFlunksWithTraits.cdc",
-      "aliases": {
-        "emulator": "0xf8d6e0586b0a20c7"
-      }
-    }
-  },
-  "networks": {
-    "emulator": "127.0.0.1:3569",
-    "mainnet": "access.mainnet.nodes.onflow.org:9000",
-    "testnet": "access.devnet.nodes.onflow.org:9000"
-  },
-  "accounts": {
-    "emulator-account": {
-      "address": "f8d6e0586b0a20c7",
-      "key": "8f6f891a07bec4d03468db68a4be2400e3f830288fc4d1144397f13d6039a0da"
-    },
-    "account1": {
-      "address": "01cf0e2f2f715450",
-      "key": "8f6f891a07bec4d03468db68a4be2400e3f830288fc4d1144397f13d6039a0da"
-    }
-  },
-  "deployments": {
-    "emulator": {
-      "emulator-account": ["SimpleFlunks", "SimpleFlunksWithTraits"]
-    }
-  }
+	"contracts": {
+		"MetadataViews": {
+			"source": "./cadence/contracts/MetadataViews.cdc",
+			"aliases": {
+				"emulator": "f8d6e0586b0a20c7",
+				"mainnet": "1d7e57aa55817448",
+				"testnet": "631e88ae7f1d7c20"
+			}
+		},
+		"NonFungibleToken": {
+			"source": "./cadence/contracts/NonFungibleToken.cdc",
+			"aliases": {
+				"emulator": "f8d6e0586b0a20c7",
+				"mainnet": "1d7e57aa55817448",
+				"testnet": "631e88ae7f1d7c20"
+			}
+		},
+		"SimpleFlunks": {
+			"source": "./cadence/contracts/SimpleFlunks.cdc",
+			"aliases": {
+				"emulator": "f8d6e0586b0a20c7",
+				"testnet": "b97ea2274b0ae5d2",
+				"mainnet": "bfffec679fff3a94"
+			}
+		},
+		"SimpleFlunksWithTraits": {
+			"source": "./cadence/contracts/SimpleFlunksWithTraits.cdc",
+			"aliases": {
+				"emulator": "f8d6e0586b0a20c7",
+				"testnet": "b97ea2274b0ae5d2",
+				"mainnet": "bfffec679fff3a94"
+			}
+		},
+		"SimpleFlunksV2": {
+			"source": "./cadence/contracts/SimpleFlunksV2.cdc",
+			"aliases": {
+				"emulator": "f8d6e0586b0a20c7",
+				"testnet": "b97ea2274b0ae5d2",
+				"mainnet": "bfffec679fff3a94"
+			}
+		},
+		"ViewResolver": {
+			"source": "./cadence/contracts/ViewResolver.cdc",
+			"aliases": {
+				"emulator": "f8d6e0586b0a20c7",
+				"mainnet": "1d7e57aa55817448",
+				"testnet": "631e88ae7f1d7c20"
+			}
+		}
+	},
+	"networks": {
+		"emulator": "127.0.0.1:3569",
+		"mainnet": "access.mainnet.nodes.onflow.org:9000",
+		"testnet": "access.devnet.nodes.onflow.org:9000"
+	},
+	"accounts": {
+		"Flunks2.0": {
+			"address": "b97ea2274b0ae5d2",
+			"key": {
+				"type": "file",
+				"location": "Flunks2.0.pkey"
+			}
+		},
+		"flunks-community": {
+			"address": "bfffec679fff3a94",
+			"key": {
+				"type": "file",
+				"location": "flunks-community.pkey",
+				"index": 1,
+				"signatureAlgorithm": "ECDSA_P256",
+				"hashAlgorithm": "SHA2_256"
+			}
+		},
+		"account1": {
+			"address": "01cf0e2f2f715450",
+			"key": "8f6f891a07bec4d03468db68a4be2400e3f830288fc4d1144397f13d6039a0da"
+		},
+		"emulator-account": {
+			"address": "f8d6e0586b0a20c7",
+			"key": "8f6f891a07bec4d03468db68a4be2400e3f830288fc4d1144397f13d6039a0da"
+		}
+	},
+	"deployments": {
+		"emulator": {
+			"emulator-account": [
+				"SimpleFlunks",
+				"SimpleFlunksWithTraits"
+			]
+		},
+		"testnet": {
+			"Flunks2.0": [
+				"SimpleFlunks",
+				"SimpleFlunksWithTraits"
+			]
+		},
+		"mainnet": {
+			"flunks-community": [
+				"SimpleFlunks",
+				"SimpleFlunksWithTraits",
+				"SimpleFlunksV2"
+			]
+		}
+	}
 }

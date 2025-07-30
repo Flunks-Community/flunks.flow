@@ -1,6 +1,6 @@
-import NonFungibleToken from 0xf8d6e0586b0a20c7
-import MetadataViews from 0xf8d6e0586b0a20c7
-import ViewResolver from 0xf8d6e0586b0a20c7
+import NonFungibleToken from "./NonFungibleToken.cdc"
+import MetadataViews from "./MetadataViews.cdc"
+import ViewResolver from "./ViewResolver.cdc"
 
 access(all)
 contract SimpleFlunks: NonFungibleToken {

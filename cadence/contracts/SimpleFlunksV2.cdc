@@ -1,9 +1,9 @@
-import NonFungibleToken from "./NonFungibleToken.cdc"
-import MetadataViews from "./MetadataViews.cdc"
-import ViewResolver from "./ViewResolver.cdc"
+import NonFungibleToken from 0x1d7e57aa55817448
+import MetadataViews from 0x1d7e57aa55817448
+import ViewResolver from 0x1d7e57aa55817448
 
 access(all)
-contract SimpleFlunksWithTraits: NonFungibleToken {
+contract SimpleFlunksV2: NonFungibleToken {
     
     access(all) event ContractInitialized()
     access(all) event Withdraw(id: UInt64, from: Address?)
@@ -16,65 +16,28 @@ contract SimpleFlunksWithTraits: NonFungibleToken {
     access(all) let CollectionPublicPath: PublicPath
     access(all) let AdminStoragePath: StoragePath
     
-    // Trait structure for NFT attributes
-    access(all) struct Trait {
-        access(all) let name: String
-        access(all) let value: AnyStruct
-        access(all) let displayType: String?
-        access(all) let rarity: String?
-        
-        init(name: String, value: AnyStruct, displayType: String?, rarity: String?) {
-            self.name = name
-            self.value = value
-            self.displayType = displayType
-            self.rarity = rarity
-        }
-    }
-    
     access(all) resource NFT: NonFungibleToken.NFT, ViewResolver.Resolver {
         
         access(all) let id: UInt64
         access(all) let name: String
         access(all) let description: String
         access(all) let image: String
-        access(all) let traits: [Trait]
-        access(all) let externalURL: String?
-        access(all) let animationURL: String?
-        access(all) let edition: UInt64?
-        access(all) let maxEdition: UInt64?
         
-        init(
-            id: UInt64, 
-            name: String, 
-            description: String, 
-            image: String,
-            traits: [Trait],
-            externalURL: String?,
-            animationURL: String?,
-            edition: UInt64?,
-            maxEdition: UInt64?
-        ) {
+        init(id: UInt64, name: String, description: String, image: String) {
             self.id = id
             self.name = name
             self.description = description
             self.image = image
-            self.traits = traits
-            self.externalURL = externalURL
-            self.animationURL = animationURL
-            self.edition = edition
-            self.maxEdition = maxEdition
         }
         
         access(all) view fun getViews(): [Type] {
             return [
                 Type<MetadataViews.Display>(),
-                Type<MetadataViews.Traits>(),
-                Type<MetadataViews.Editions>(),
-                Type<MetadataViews.ExternalURL>(),
                 Type<MetadataViews.NFTCollectionData>(),
                 Type<MetadataViews.NFTCollectionDisplay>(),
-                Type<MetadataViews.Serial>(),
-                Type<MetadataViews.Royalties>()
+                Type<MetadataViews.Royalties>(),
+                Type<MetadataViews.ExternalURL>(),
+                Type<MetadataViews.Serial>()
             ]
         }
         
@@ -87,45 +50,20 @@ contract SimpleFlunksWithTraits: NonFungibleToken {
                         thumbnail: MetadataViews.HTTPFile(url: self.image)
                     )
                 
-                case Type<MetadataViews.Traits>():
-                    let traitsView: [MetadataViews.Trait] = []
-                    for trait in self.traits {
-                        traitsView.append(MetadataViews.Trait(
-                            name: trait.name,
-                            value: trait.value,
-                            displayType: trait.displayType,
-                            rarity: trait.rarity != nil ? MetadataViews.Rarity(
-                                score: nil,
-                                max: nil,
-                                description: trait.rarity!
-                            ) : nil
-                        ))
-                    }
-                    return MetadataViews.Traits(traitsView)
+                case Type<MetadataViews.NFTCollectionData>():
+                    return SimpleFlunksV2.resolveContractView(resourceType: nil, viewType: Type<MetadataViews.NFTCollectionData>())
                 
-                case Type<MetadataViews.Editions>():
-                    if self.edition != nil && self.maxEdition != nil {
-                        return MetadataViews.Editions([
-                            MetadataViews.Edition(
-                                name: "SimpleFlunks Edition",
-                                number: self.edition!,
-                                max: self.maxEdition
-                            )
-                        ])
-                    }
-                    return nil
-                
-                case Type<MetadataViews.ExternalURL>():
-                    if self.externalURL != nil {
-                        return MetadataViews.ExternalURL(self.externalURL!)
-                    }
-                    return nil
-                
-                case Type<MetadataViews.Serial>():
-                    return MetadataViews.Serial(self.id)
+                case Type<MetadataViews.NFTCollectionDisplay>():
+                    return SimpleFlunksV2.resolveContractView(resourceType: nil, viewType: Type<MetadataViews.NFTCollectionDisplay>())
                 
                 case Type<MetadataViews.Royalties>():
                     return MetadataViews.Royalties([])
+                
+                case Type<MetadataViews.ExternalURL>():
+                    return MetadataViews.ExternalURL("https://flunks.community")
+                
+                case Type<MetadataViews.Serial>():
+                    return MetadataViews.Serial(self.id)
             }
             return nil
         }
@@ -150,7 +88,7 @@ contract SimpleFlunksWithTraits: NonFungibleToken {
         }
         
         access(all) fun deposit(token: @{NonFungibleToken.NFT}) {
-            let token <- token as! @SimpleFlunksWithTraits.NFT
+            let token <- token as! @SimpleFlunksV2.NFT
             let id: UInt64 = token.id
             let oldToken <- self.ownedNFTs[id] <- token
             emit Deposit(id: id, to: self.owner?.address)
@@ -177,11 +115,11 @@ contract SimpleFlunksWithTraits: NonFungibleToken {
         }
         
         access(all) view fun getSupportedNFTTypes(): {Type: Bool} {
-            return {Type<@SimpleFlunksWithTraits.NFT>(): true}
+            return {Type<@SimpleFlunksV2.NFT>(): true}
         }
         
         access(all) view fun isSupportedNFTType(type: Type): Bool {
-            return type == Type<@SimpleFlunksWithTraits.NFT>()
+            return type == Type<@SimpleFlunksV2.NFT>()
         }
     }
     
@@ -191,32 +129,22 @@ contract SimpleFlunksWithTraits: NonFungibleToken {
             recipient: &{NonFungibleToken.CollectionPublic},
             name: String,
             description: String,
-            image: String,
-            traits: [Trait],
-            externalURL: String?,
-            animationURL: String?,
-            edition: UInt64?,
-            maxEdition: UInt64?
+            image: String
         ) {
             let newNFT <- create NFT(
-                id: SimpleFlunksWithTraits.totalSupply,
+                id: SimpleFlunksV2.totalSupply,
                 name: name,
                 description: description,
-                image: image,
-                traits: traits,
-                externalURL: externalURL,
-                animationURL: animationURL,
-                edition: edition,
-                maxEdition: maxEdition
+                image: image
             )
             
             let recipientAddress = recipient.owner!.address
             
             recipient.deposit(token: <-newNFT)
             
-            emit Minted(id: SimpleFlunksWithTraits.totalSupply, to: recipientAddress)
+            emit Minted(id: SimpleFlunksV2.totalSupply, to: recipientAddress)
             
-            SimpleFlunksWithTraits.totalSupply = SimpleFlunksWithTraits.totalSupply + 1
+            SimpleFlunksV2.totalSupply = SimpleFlunksV2.totalSupply + 1
         }
     }
     
@@ -225,20 +153,41 @@ contract SimpleFlunksWithTraits: NonFungibleToken {
     }
     
     access(all) view fun getContractViews(resourceType: Type?): [Type] {
-        return [Type<MetadataViews.NFTCollectionData>()]
+        return [
+            Type<MetadataViews.NFTCollectionData>(),
+            Type<MetadataViews.NFTCollectionDisplay>()
+        ]
     }
     
     access(all) fun resolveContractView(resourceType: Type?, viewType: Type): AnyStruct? {
         switch viewType {
             case Type<MetadataViews.NFTCollectionData>():
                 return MetadataViews.NFTCollectionData(
-                    storagePath: SimpleFlunksWithTraits.CollectionStoragePath,
-                    publicPath: SimpleFlunksWithTraits.CollectionPublicPath,
-                    publicCollection: Type<&SimpleFlunksWithTraits.Collection>(),
-                    publicLinkedType: Type<&SimpleFlunksWithTraits.Collection>(),
+                    storagePath: SimpleFlunksV2.CollectionStoragePath,
+                    publicPath: SimpleFlunksV2.CollectionPublicPath,
+                    publicCollection: Type<&SimpleFlunksV2.Collection>(),
+                    publicLinkedType: Type<&SimpleFlunksV2.Collection>(),
                     createEmptyCollectionFunction: (fun (): @{NonFungibleToken.Collection} {
-                        return <-SimpleFlunksWithTraits.createEmptyCollection(nftType: Type<@SimpleFlunksWithTraits.Collection>())
+                        return <-SimpleFlunksV2.createEmptyCollection(nftType: Type<@SimpleFlunksV2.NFT>())
                     })
+                )
+            
+            case Type<MetadataViews.NFTCollectionDisplay>():
+                return MetadataViews.NFTCollectionDisplay(
+                    name: "Flunks Community",
+                    description: "The official Flunks NFT collection on Flow mainnet",
+                    externalURL: MetadataViews.ExternalURL("https://flunks.community"),
+                    squareImage: MetadataViews.Media(
+                        file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/backpack/1c023bb17a570b7e114e35d195035e41fc60a5c3c60933daf1c780f51abfe24d.png"),
+                        mediaType: "image/png"
+                    ),
+                    bannerImage: MetadataViews.Media(
+                        file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/backpack/1c023bb17a570b7e114e35d195035e41fc60a5c3c60933daf1c780f51abfe24d.png"),
+                        mediaType: "image/png"
+                    ),
+                    socials: {
+                        "website": MetadataViews.ExternalURL("https://flunks.community")
+                    }
                 )
         }
         return nil
@@ -247,9 +196,9 @@ contract SimpleFlunksWithTraits: NonFungibleToken {
     init() {
         self.totalSupply = 0
         
-        self.CollectionStoragePath = /storage/SimpleFlunksWithTraitsCollection
-        self.CollectionPublicPath = /public/SimpleFlunksWithTraitsCollection
-        self.AdminStoragePath = /storage/SimpleFlunksWithTraitsAdmin
+        self.CollectionStoragePath = /storage/SimpleFlunksV2Collection
+        self.CollectionPublicPath = /public/SimpleFlunksV2Collection
+        self.AdminStoragePath = /storage/SimpleFlunksV2Admin
         
         let admin <- create Admin()
         self.account.storage.save(<-admin, to: self.AdminStoragePath)
