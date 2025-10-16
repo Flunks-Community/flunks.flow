@@ -1,5 +1,13 @@
 {
 	"contracts": {
+		"Flunks": {
+			"source": "./cadence/contracts/Flunks.cdc",
+			"aliases": {
+				"emulator": "f8d6e0586b0a20c7",
+				"mainnet": "807c3d470888cc48",
+				"testnet": "b97ea2274b0ae5d2"
+			}
+		},
 		"MetadataViews": {
 			"source": "./cadence/contracts/MetadataViews.cdc",
 			"aliases": {
@@ -20,24 +28,24 @@
 			"source": "./cadence/contracts/SimpleFlunks.cdc",
 			"aliases": {
 				"emulator": "f8d6e0586b0a20c7",
-				"testnet": "b97ea2274b0ae5d2",
-				"mainnet": "bfffec679fff3a94"
-			}
-		},
-		"SimpleFlunksWithTraits": {
-			"source": "./cadence/contracts/SimpleFlunksWithTraits.cdc",
-			"aliases": {
-				"emulator": "f8d6e0586b0a20c7",
-				"testnet": "b97ea2274b0ae5d2",
-				"mainnet": "bfffec679fff3a94"
+				"mainnet": "bfffec679fff3a94",
+				"testnet": "b97ea2274b0ae5d2"
 			}
 		},
 		"SimpleFlunksV2": {
 			"source": "./cadence/contracts/SimpleFlunksV2.cdc",
 			"aliases": {
 				"emulator": "f8d6e0586b0a20c7",
-				"testnet": "b97ea2274b0ae5d2",
-				"mainnet": "bfffec679fff3a94"
+				"mainnet": "bfffec679fff3a94",
+				"testnet": "b97ea2274b0ae5d2"
+			}
+		},
+		"SimpleFlunksWithTraits": {
+			"source": "./cadence/contracts/SimpleFlunksWithTraits.cdc",
+			"aliases": {
+				"emulator": "f8d6e0586b0a20c7",
+				"mainnet": "bfffec679fff3a94",
+				"testnet": "b97ea2274b0ae5d2"
 			}
 		},
 		"ViewResolver": {
@@ -62,16 +70,6 @@
 				"location": "Flunks2.0.pkey"
 			}
 		},
-		"flunks-community": {
-			"address": "bfffec679fff3a94",
-			"key": {
-				"type": "file",
-				"location": "flunks-community.pkey",
-				"index": 1,
-				"signatureAlgorithm": "ECDSA_P256",
-				"hashAlgorithm": "SHA2_256"
-			}
-		},
 		"account1": {
 			"address": "01cf0e2f2f715450",
 			"key": "8f6f891a07bec4d03468db68a4be2400e3f830288fc4d1144397f13d6039a0da"
@@ -79,6 +77,22 @@
 		"emulator-account": {
 			"address": "f8d6e0586b0a20c7",
 			"key": "8f6f891a07bec4d03468db68a4be2400e3f830288fc4d1144397f13d6039a0da"
+		},
+		"flunks-community": {
+			"address": "bfffec679fff3a94",
+			"key": {
+				"type": "file",
+				"index": 1,
+				"hashAlgorithm": "SHA2_256",
+				"location": "flunks-community.pkey"
+			}
+		},
+		"mainnet-account": {
+			"address": "807c3d470888cc48",
+			"key": {
+				"type": "file",
+				"location": "mainnet-account.pkey"
+			}
 		}
 	},
 	"deployments": {
@@ -88,17 +102,20 @@
 				"SimpleFlunksWithTraits"
 			]
 		},
-		"testnet": {
-			"Flunks2.0": [
-				"SimpleFlunks",
-				"SimpleFlunksWithTraits"
-			]
-		},
 		"mainnet": {
 			"flunks-community": [
 				"SimpleFlunks",
 				"SimpleFlunksWithTraits",
 				"SimpleFlunksV2"
+			],
+			"mainnet-account": [
+				"Flunks"
+			]
+		},
+		"testnet": {
+			"Flunks2.0": [
+				"SimpleFlunks",
+				"SimpleFlunksWithTraits"
 			]
 		}
 	}

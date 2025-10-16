@@ -76,7 +76,7 @@ contract TestFlunks: NonFungibleToken {
                     }
                     return MetadataViews.Traits(traits)
                 case Type<MetadataViews.ExternalURL>():
-                    return MetadataViews.ExternalURL("https://flunks.io/")
+                    return MetadataViews.ExternalURL("https://flunks.net/")
                 case Type<MetadataViews.NFTCollectionData>():
                     return MetadataViews.NFTCollectionData(
                         storagePath: TestFlunks.CollectionStoragePath,
@@ -89,13 +89,13 @@ contract TestFlunks: NonFungibleToken {
                     )
                 case Type<MetadataViews.NFTCollectionDisplay>():
                     let media = MetadataViews.Media(
-                        file: MetadataViews.HTTPFile(url: "https://flunks.io/logo.png"),
+                        file: MetadataViews.HTTPFile(url: "https://flunks.net/logo.png"),
                         mediaType: "image/png"
                     )
                     return MetadataViews.NFTCollectionDisplay(
                         name: "Test Flunks Collection",
                         description: "A test collection of Flunks NFTs",
-                        externalURL: MetadataViews.ExternalURL("https://flunks.io/"),
+                        externalURL: MetadataViews.ExternalURL("https://flunks.net/"),
                         squareImage: media,
                         bannerImage: media,
                         socials: {}
@@ -219,13 +219,13 @@ contract TestFlunks: NonFungibleToken {
                 )
             case Type<MetadataViews.NFTCollectionDisplay>():
                 let media = MetadataViews.Media(
-                    file: MetadataViews.HTTPFile(url: "https://flunks.io/logo.png"),
+                    file: MetadataViews.HTTPFile(url: "https://flunks.net/logo.png"),
                     mediaType: "image/png"
                 )
                 return MetadataViews.NFTCollectionDisplay(
                     name: "Test Flunks Collection",
                     description: "A test collection of Flunks NFTs",
-                    externalURL: MetadataViews.ExternalURL("https://flunks.io/"),
+                    externalURL: MetadataViews.ExternalURL("https://flunks.net/"),
                     squareImage: media,
                     bannerImage: media,
                     socials: {}

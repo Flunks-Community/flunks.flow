@@ -153,14 +153,14 @@ contract Patch: NonFungibleToken{
 				case Type<MetadataViews.Display>():
 					return MetadataViews.Display(name: self.getNFTTemplate().name, description: self.getNFTTemplate().description, thumbnail: MetadataViews.HTTPFile(url: self.getNFTTemplate().getMetadata()["uri"]!))
 				case Type<MetadataViews.ExternalURL>():
-					return MetadataViews.ExternalURL("https://flunks.io/")
+					return MetadataViews.ExternalURL("https://flunks.net/")
 				case Type<MetadataViews.NFTCollectionData>():
 					return MetadataViews.NFTCollectionData(storagePath: Patch.CollectionStoragePath, publicPath: Patch.CollectionPublicPath, publicCollection: Type<&Patch.Collection>(), publicLinkedType: Type<&Patch.Collection>(), createEmptyCollectionFunction: fun (): @{NonFungibleToken.Collection}{ 
 							return <-Patch.createEmptyCollection(nftType: Type<@Patch.Collection>())
 						})
 				case Type<MetadataViews.NFTCollectionDisplay>():
-					let media = MetadataViews.Media(file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/website-assets/classroom.png"), mediaType: "image/png")
-					return MetadataViews.NFTCollectionDisplay(name: "Backpack Patch", description: "Backpack Patches #onFlow", externalURL: MetadataViews.ExternalURL("https://flunks.io/"), squareImage: media, bannerImage: media, socials:{ "twitter": MetadataViews.ExternalURL("https://twitter.com/flunks_nft")})
+					let media = MetadataViews.Media(file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/website-assets/backpack.png"), mediaType: "image/png")
+					return MetadataViews.NFTCollectionDisplay(name: "Backpack Patch", description: "Backpack Patches #onFlow", externalURL: MetadataViews.ExternalURL("https://flunks.net/"), squareImage: media, bannerImage: media, socials:{ "twitter": MetadataViews.ExternalURL("https://twitter.com/flunks_nft")})
 				case Type<MetadataViews.Royalties>():
 					return MetadataViews.Royalties([])
 			}

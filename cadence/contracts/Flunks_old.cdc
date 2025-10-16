@@ -1,40 +1,19 @@
-import FungibleToken from 0xf233dcee88fe0abe
-import ViewResolver from 0x1d7e57aa55817448
-import NonFungibleToken from 0x1d7e57aa55817448
-import MetadataViews from 0x1d7e57aa55817448
+import FungibleToken from "./FungibleToken.cdc"
+import ViewResolver from "./ViewResolver.cdc"
+import NonFungibleToken from "./NonFungibleToken.cdc"
+import MetadataViews from "./MetadataViews.cdc"
 
-
-access(all)
-contract Flunks: NonFungibleToken{ 
-	access(all)
-	event ContractInitialized()
-	
-	access(all)
-	event SetCreated(setID: UInt64)
-	
-	access(all)
-	event NFTTemplateCreated(templateID: UInt64, metadata:{ String: String})
-	
-	access(all)
-	event Withdraw(id: UInt64, from: Address?)
-	
-	access(all)
-	event Deposit(id: UInt64, to: Address?)
-	
-	access(all)
-	event Minted(id: UInt64, templateID: UInt64)
-	
-	access(all)
-	event TemplateAddedToSet(setID: UInt64, templateID: UInt64)
-	
-	access(all)
-	event TemplateLockedFromSet(setID: UInt64, templateID: UInt64)
-	
-	access(all)
-	event TemplateUpdated(template: FlunksTemplate)
-	
-	access(all)
-	event SetLocked(setID: UInt64)
+access(all) contract Flunks: NonFungibleToken { 
+	access(all) event ContractInitialized()
+	access(all) event SetCreated(setID: UInt64)
+	access(all) event NFTTemplateCreated(templateID: UInt64, metadata:{ String: String})
+	access(all) event Withdraw(id: UInt64, from: Address?)
+	access(all) event Deposit(id: UInt64, to: Address?)
+	access(all) event Minted(id: UInt64, templateID: UInt64)
+	access(all) event TemplateAddedToSet(setID: UInt64, templateID: UInt64)
+	access(all) event TemplateLockedFromSet(setID: UInt64, templateID: UInt64)
+	access(all) event TemplateUpdated(template: FlunksTemplate)
+	access(all) event SetLocked(setID: UInt64)
 	
 	access(all)
 	let CollectionStoragePath: StoragePath
@@ -82,23 +61,18 @@ contract Flunks: NonFungibleToken{
 	
 	access(all)
 	struct FlunksTemplate{ 
-		access(all)
-		let templateID: UInt64
+		access(all) let templateID: UInt64
 		
-		access(all)
-		var name: String
+		access(all) var name: String
 		
-		access(all)
-		var description: String
+		access(all) var description: String
 		
-		access(all)
-		var locked: Bool
+		access(all) var locked: Bool
 		
 		access(all)
 		var addedToSet: UInt64
 		
-		access(self)
-		var metadata:{ String: String}
+		access(self) var metadata:{ String: String}
 		
 		access(all)
 		fun getMetadata():{ String: String}{ 
@@ -150,24 +124,24 @@ contract Flunks: NonFungibleToken{
 		}
 	}
 	
-	access(all)
-	resource NFT: NonFungibleToken.NFT, ViewResolver.Resolver{ 
-		access(all)
-		let id: UInt64
-		
-		access(all)
-		let templateID: UInt64
-		
-		access(all)
-		let serialNumber: UInt64
-		
-		access(all)
-		view fun getViews(): [Type]{ 
-			return [Type<MetadataViews.Display>(), Type<MetadataViews.NFTCollectionData>(), Type<MetadataViews.NFTCollectionDisplay>(), Type<MetadataViews.ExternalURL>(), Type<MetadataViews.Traits>(), Type<MetadataViews.Edition>(), Type<MetadataViews.Royalties>(), Type<MetadataViews.Serial>()]
+	access(all) resource NFT: NonFungibleToken.NFT, ViewResolver.Resolver{ 
+		access(all) let id: UInt64
+		access(all) let templateID: UInt64
+		access(all) let serialNumber: UInt64
+
+		access(all) view fun getViews(): [Type]{ 
+			return [
+				Type<MetadataViews.Display>(), 
+				Type<MetadataViews.NFTCollectionData>(), 
+				Type<MetadataViews.NFTCollectionDisplay>(), 
+				Type<MetadataViews.ExternalURL>(), 
+				Type<MetadataViews.Traits>(), 
+				Type<MetadataViews.Edition>(), 
+				Type<MetadataViews.Royalties>(), 
+				Type<MetadataViews.Serial>()]
 		}
 		
-		access(all)
-		fun resolveView(_ view: Type): AnyStruct?{ 
+		access(all) fun resolveView(_ view: Type): AnyStruct? { 
 			switch view{ 
 				case Type<Flunks.PixelUrl>():
 					let pixelUri = self.getNFTTemplate().getMetadata()["pixelUri"]
@@ -180,24 +154,31 @@ contract Flunks: NonFungibleToken{
 					}
 				case Type<MetadataViews.Display>():
 					return MetadataViews.Display(name: self.getNFTTemplate().name.concat(" #").concat(self.templateID.toString()), description: self.getNFTTemplate().description, thumbnail: MetadataViews.HTTPFile(url: self.getNFTTemplate().getMetadata()["uri"]!))
+				
 				case Type<MetadataViews.ExternalURL>():
 					return MetadataViews.ExternalURL("https://flunks.net/")
+				
 				case Type<MetadataViews.NFTCollectionData>():
 					return MetadataViews.NFTCollectionData(storagePath: Flunks.CollectionStoragePath, publicPath: Flunks.CollectionPublicPath, publicCollection: Type<&Flunks.Collection>(), publicLinkedType: Type<&Flunks.Collection>(), createEmptyCollectionFunction: fun (): @{NonFungibleToken.Collection}{ 
-							return <-Flunks.createEmptyCollection(nftType: Type<@Flunks.NFT>())
+							return <-Flunks.createEmptyCollection(nftType: Type<@Flunks.Collection>())
 						})
+				
 				case Type<MetadataViews.NFTCollectionDisplay>():
 					let bannerMedia = MetadataViews.Media(file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/website-assets/banner_2023.png"), mediaType: "image/png")
 					let logoFull = MetadataViews.Media(file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/images/flunks.png"), mediaType: "image/png")
 					return MetadataViews.NFTCollectionDisplay(name: "Flunks", description: "Flunks are cute but mischievous high-schoolers wreaking havoc #onFlow", externalURL: MetadataViews.ExternalURL("https://flunks.net/"), squareImage: logoFull, bannerImage: bannerMedia, socials:{ "twitter": MetadataViews.ExternalURL("https://twitter.com/flunks_nft")})
+				
 				case Type<MetadataViews.Traits>():
 					let excludedTraits = ["mimetype", "uri", "pixelUri", "path", "cid"]
 					let traitsView = MetadataViews.dictToTraits(dict: self.getNFTTemplate().getMetadata(), excludedNames: excludedTraits)
 					return traitsView
+				
 				case Type<MetadataViews.Edition>():
 					return MetadataViews.Edition(name: "Flunks", number: self.templateID, max: 9999)
+				
 				case Type<MetadataViews.Serial>():
 					return MetadataViews.Serial(self.templateID)
+				
 				case Type<MetadataViews.Royalties>():
 					// Note: replace the address for different merchant accounts across various networks
 					let merchant = getAccount(0x0cce91b08cb58286)
@@ -206,8 +187,7 @@ contract Flunks: NonFungibleToken{
 			return nil
 		}
 		
-		access(all)
-		fun getNFTTemplate(): FlunksTemplate{ 
+		access(all) fun getNFTTemplate(): FlunksTemplate{ 
 			return Flunks.FlunksTemplates[self.templateID]!
 		}
 		
@@ -478,8 +458,7 @@ contract Flunks: NonFungibleToken{
 		return [
 			Type<MetadataViews.NFTCollectionData>(),
 			Type<MetadataViews.NFTCollectionDisplay>(),
-			Type<MetadataViews.EVMBridgedMetadata>(),
-			Type<MetadataViews.Royalties>()
+			Type<MetadataViews.EVMBridgedMetadata>()
 		]
 	}
 
@@ -490,10 +469,7 @@ contract Flunks: NonFungibleToken{
                 storagePath: Flunks.CollectionStoragePath,
                 publicPath: Flunks.CollectionPublicPath,
                 publicCollection: Type<&Flunks.Collection>(),
-                publicLinkedType: Type<&Flunks.Collection>(),
-                createEmptyCollectionFunction: (fun (): @{NonFungibleToken.Collection} {
-                    return <-Flunks.createEmptyCollection(nftType: Type<@Flunks.NFT>())
-                })
+                publicLinkedType: Type<&Flunks.Collection>()
             )
         case Type<MetadataViews.NFTCollectionDisplay>():
             return MetadataViews.NFTCollectionDisplay(
@@ -512,24 +488,6 @@ contract Flunks: NonFungibleToken{
                     "twitter": MetadataViews.ExternalURL("https://twitter.com/flunks_nft")
                 }
             )
-        case Type<MetadataViews.EVMBridgedMetadata>():
-            return MetadataViews.EVMBridgedMetadata(
-                name: "Flunks",
-                symbol: "FLNK",
-                uri: MetadataViews.URI(
-                    baseURI: "https://flunks.net/nft/",
-                    value: ""
-                )
-            )
-        case Type<MetadataViews.Royalties>():
-            return MetadataViews.Royalties([
-                MetadataViews.Royalty(
-                    receiver: getAccount(0xbfffec679fff3a94)
-                        .capabilities.get<&{FungibleToken.Receiver}>(/public/flowTokenReceiver),
-                    cut: 0.10,
-                    description: "Flunks creator royalty"
-                )
-            ])
         default:
             return nil
     }

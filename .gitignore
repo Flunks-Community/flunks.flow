@@ -13,3 +13,5 @@ node_modules/
 .vscode/
 
 Flunks2.0.pkey
+flunks-community.pkey
+mainnet-account.pkey

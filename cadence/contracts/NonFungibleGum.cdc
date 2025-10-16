@@ -165,7 +165,7 @@ pub contract NonFungibleGUM: NonFungibleToken {
                 )
 
                 case Type<MetadataViews.ExternalURL>():
-                    return MetadataViews.ExternalURL(url: "https://flunks.io/")
+                    return MetadataViews.ExternalURL(url: "https://flunks.net/")
 
                 case Type<MetadataViews.NFTCollectionData>():
                     return MetadataViews.NFTCollectionData(
@@ -189,8 +189,8 @@ pub contract NonFungibleGUM: NonFungibleToken {
                     )
                     return MetadataViews.NFTCollectionDisplay(
                         name: "NonFungibleGUM",
-                        description: "NonFungibleGUM",
-                        externalURL: MetadataViews.ExternalURL("https://flunks.io/"),
+                        description: "NonFungibleGum #onFlow",
+                        externalURL: MetadataViews.ExternalURL("https://flunks.net/"),
                         squareImage: media,
                         bannerImage: media,
                         socials: {
