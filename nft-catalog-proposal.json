@@ -1,0 +1,22 @@
+{
+  "contractName": "SemesterZero",
+  "contractAddress": "0xce9dd43888d99574",
+  "nftType": {
+    "typeID": "A.ce9dd43888d99574.SemesterZero.Chapter5NFT"
+  },
+  "collectionData": {
+    "storagePath": "/storage/SemesterZeroChapter5Collection",
+    "publicPath": "/public/SemesterZeroChapter5Collection",
+    "publicLinkedType": "A.ce9dd43888d99574.SemesterZero.Chapter5Collection"
+  },
+  "collectionDisplay": {
+    "name": "Flunks: Semester Zero",
+    "description": "Exclusive NFT awarded to students who completed both the Slacker and Overachiever paths in Chapter 5 of Semester Zero at Flunks University.",
+    "externalURL": "https://flunks.flow",
+    "squareImage": "https://storage.googleapis.com/flunks_public/images/semester-zero-square.png",
+    "bannerImage": "https://storage.googleapis.com/flunks_public/images/semester-zero-banner.png",
+    "socials": {
+      "twitter": "https://twitter.com/flunks"
+    }
+  }
+}

@@ -484,56 +484,55 @@ contract Flunks: NonFungibleToken{
 	}
 
 	access(all) fun resolveContractView(resourceType: Type?, viewType: Type): AnyStruct? {
-    switch viewType {
-        case Type<MetadataViews.NFTCollectionData>():
-            return MetadataViews.NFTCollectionData(
-                storagePath: Flunks.CollectionStoragePath,
-                publicPath: Flunks.CollectionPublicPath,
-                publicCollection: Type<&Flunks.Collection>(),
-                publicLinkedType: Type<&Flunks.Collection>(),
-                createEmptyCollectionFunction: (fun (): @{NonFungibleToken.Collection} {
-                    return <-Flunks.createEmptyCollection(nftType: Type<@Flunks.NFT>())
-                })
-            )
-        case Type<MetadataViews.NFTCollectionDisplay>():
-            return MetadataViews.NFTCollectionDisplay(
-                name: "Flunks",
-                description: "Flunks are cute but mischievous high-schoolers wreaking havoc #onFlow",
-                externalURL: MetadataViews.ExternalURL("https://flunks.net/"),
-                squareImage: MetadataViews.Media(
-                    file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/images/flunks.png"),
-                    mediaType: "image/png"
-                ),
-                bannerImage: MetadataViews.Media(
-                    file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/website-assets/banner_2023.png"),
-                    mediaType: "image/png"
-                ),
-                socials: {
-                    "twitter": MetadataViews.ExternalURL("https://twitter.com/flunks_nft")
-                }
-            )
-        case Type<MetadataViews.EVMBridgedMetadata>():
-            return MetadataViews.EVMBridgedMetadata(
-                name: "Flunks",
-                symbol: "FLNK",
-                uri: MetadataViews.URI(
-                    baseURI: "https://flunks.net/nft/",
-                    value: ""
-                )
-            )
-        case Type<MetadataViews.Royalties>():
-            return MetadataViews.Royalties([
-                MetadataViews.Royalty(
-                    receiver: getAccount(0xbfffec679fff3a94)
-                        .capabilities.get<&{FungibleToken.Receiver}>(/public/flowTokenReceiver),
-                    cut: 0.10,
-                    description: "Flunks creator royalty"
-                )
-            ])
-        default:
-            return nil
-    }
-}
+		switch viewType {
+			case Type<MetadataViews.NFTCollectionData>():
+				return MetadataViews.NFTCollectionData(
+					storagePath: Flunks.CollectionStoragePath,
+					publicPath: Flunks.CollectionPublicPath,
+					publicCollection: Type<&Flunks.Collection>(),
+					publicLinkedType: Type<&Flunks.Collection>(),
+					createEmptyCollectionFunction: (fun (): @{NonFungibleToken.Collection} {
+						return <-Flunks.createEmptyCollection(nftType: Type<@Flunks.NFT>())
+					})
+				)
+			case Type<MetadataViews.NFTCollectionDisplay>():
+				return MetadataViews.NFTCollectionDisplay(
+					name: "Flunks",
+					description: "Flunks are cute but mischievous high-schoolers wreaking havoc #onFlow",
+					externalURL: MetadataViews.ExternalURL("https://flunks.net/"),
+					squareImage: MetadataViews.Media(
+						file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/images/flunks.png"),
+						mediaType: "image/png"
+					),
+					bannerImage: MetadataViews.Media(
+						file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/website-assets/banner_2023.png"),
+						mediaType: "image/png"
+					),
+					socials: {
+						"twitter": MetadataViews.ExternalURL("https://twitter.com/flunks_nft")
+					}
+				)
+			case Type<MetadataViews.EVMBridgedMetadata>():
+				return MetadataViews.EVMBridgedMetadata(
+					name: "Flunks",
+					symbol: "FLNK",
+					uri: MetadataViews.URI(
+						baseURI: "https://flunks.net/nft/",
+						value: ""
+					)
+				)
+			case Type<MetadataViews.Royalties>():
+				return MetadataViews.Royalties([
+					MetadataViews.Royalty(
+						receiver: getAccount(0xbfffec679fff3a94)
+							.capabilities.get<&{FungibleToken.Receiver}>(/public/flowTokenReceiver),
+						cut: 0.10,
+						description: "Flunks creator royalty"
+					)
+				])
+		}
+		return nil
+	}
 	
 	init(){ 
 		self.CollectionStoragePath = /storage/FlunksCollection
