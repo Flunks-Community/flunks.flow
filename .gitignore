@@ -12,6 +12,5 @@ node_modules/
 .idea/
 .vscode/
 
-Flunks2.0.pkey
-flunks-community.pkey
-mainnet-account.pkey
+# Private keys - NEVER commit these!
+*.pkey
