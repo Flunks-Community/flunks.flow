@@ -188,7 +188,7 @@ contract Flunks: NonFungibleToken{
 						})
 				case Type<MetadataViews.NFTCollectionDisplay>():
 					let bannerMedia = MetadataViews.Media(file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/website-assets/banner_2023.png"), mediaType: "image/png")
-					let logoFull = MetadataViews.Media(file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/images/flunks.png"), mediaType: "image/png")
+					let logoFull = MetadataViews.Media(file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/images/F%20for%20flowty.png"), mediaType: "image/png")
 					return MetadataViews.NFTCollectionDisplay(name: "Flunks", description: "Flunks are cute but mischievous high-schoolers wreaking havoc #onFlow", externalURL: MetadataViews.ExternalURL("https://flunks.net/"), squareImage: logoFull, bannerImage: bannerMedia, socials:{ "twitter": MetadataViews.ExternalURL("https://twitter.com/flunks_nft")})
 				case Type<MetadataViews.Traits>():
 					let excludedTraits = ["mimetype", "uri", "pixelUri", "path", "cid"]
