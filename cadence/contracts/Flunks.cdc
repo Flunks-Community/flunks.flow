@@ -501,7 +501,7 @@ contract Flunks: NonFungibleToken{
 					description: "Flunks are cute but mischievous high-schoolers wreaking havoc #onFlow",
 					externalURL: MetadataViews.ExternalURL("https://flunks.net/"),
 					squareImage: MetadataViews.Media(
-						file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/images/flunks.png"),
+						file: MetadataViews.HTTPFile(url: "https://storage.googleapis.com/flunks_public/images/F%20for%20flowty.png"),
 						mediaType: "image/png"
 					),
 					bannerImage: MetadataViews.Media(
