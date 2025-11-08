@@ -10,6 +10,7 @@
 		},
 		"FlunksGraduation": "cadence/contracts/FlunksGraduation.cdc",
 		"FlunksGumDrop": "./cadence/contracts/FlunksGumDrop.cdc",
+		"FlunksSemesterZero": "cadence/contracts/FlunksSemesterZero.cdc",
 		"HalloweenDropHandler": "./cadence/contracts/HalloweenDropHandler.cdc",
 		"MetadataViews": {
 			"source": "./cadence/contracts/MetadataViews.cdc",
@@ -139,7 +140,8 @@
 				"FlunksGraduation"
 			],
 			"semester-zero-account": [
-				"SemesterZero"
+				"SemesterZero",
+				"FlunksSemesterZero"
 			]
 		},
 		"testnet": {

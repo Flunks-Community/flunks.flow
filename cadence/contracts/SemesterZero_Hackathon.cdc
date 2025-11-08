@@ -648,12 +648,13 @@ access(all) contract SemesterZero: NonFungibleToken, ViewResolver {
                 )
                 return MetadataViews.NFTCollectionDisplay(
                     name: "Flunks: Semester Zero",
-                    description: "Exclusive NFT awarded to students who completed both the Slacker and Overachiever paths in Chapter 5 of Semester Zero at Flunks University.",
-                    externalURL: MetadataViews.ExternalURL("https://flunks.flow"),
+                    description: "Flunks: Semester Zero is a standalone collection that rewards users for exploring flunks.net and participating in events, challenges and completing objectives.",
+                    externalURL: MetadataViews.ExternalURL("https://flunks.net"),
                     squareImage: squareMedia,
                     bannerImage: bannerMedia,
                     socials: {
-                        "twitter": MetadataViews.ExternalURL("https://twitter.com/flunks")
+                        "twitter": MetadataViews.ExternalURL("https://x.com/flunks_nft"),
+                        "discord": MetadataViews.ExternalURL("https://discord.gg/flunks")
                     }
                 )
         }

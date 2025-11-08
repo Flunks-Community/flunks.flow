@@ -1,0 +1,24 @@
+{
+  "contractName": "FlunksSemesterZero",
+  "contractAddress": "0xce9dd43888d99574",
+  "path": {
+    "storage": "FlunksSemesterZeroCollection",
+    "public": "FlunksSemesterZeroCollection"
+  },
+  "evmAddress": null,
+  "flowAddress": "0xce9dd43888d99574",
+  "tags": ["nft", "gaming", "achievement", "education", "community"],
+  "identity": {
+    "name": "Flunks: Semester Zero",
+    "description": "Exclusive NFTs rewarding slackers and overachievers who completed Chapter 5 challenges in Flunks: Semester Zero. Paradise Motel awaits those who proved their worth.",
+    "website": "https://flunks.io",
+    "twitter": "https://twitter.com/flunksnft"
+  },
+  "display": {
+    "name": "Flunks: Semester Zero",
+    "description": "Chapter 5 completion NFTs - Paradise Motel collection",
+    "thumbnail": "https://storage.googleapis.com/flunks_public/images/semesterzero.png",
+    "banner": "https://storage.googleapis.com/flunks_public/images/banner.png"
+  },
+  "reviewStatus": 0
+}
