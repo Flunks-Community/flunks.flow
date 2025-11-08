@@ -8,7 +8,12 @@
 				"testnet": "b97ea2274b0ae5d2"
 			}
 		},
-		"FlunksGraduation": "cadence/contracts/FlunksGraduation.cdc",
+		"FlunksGraduation": {
+			"source": "cadence/contracts/FlunksGraduation.cdc",
+			"aliases": {
+				"mainnet": "807c3d470888cc48"
+			}
+		},
 		"FlunksGumDrop": "./cadence/contracts/FlunksGumDrop.cdc",
 		"FlunksSemesterZero": "cadence/contracts/FlunksSemesterZero.cdc",
 		"HalloweenDropHandler": "./cadence/contracts/HalloweenDropHandler.cdc",
@@ -136,8 +141,7 @@
 			],
 			"mainnet-account": [
 				"Flunks",
-				"FlunksGumDrop",
-				"FlunksGraduation"
+				"FlunksGumDrop"
 			],
 			"semester-zero-account": [
 				"SemesterZero",
